@@ -22,7 +22,7 @@ namespace Programming
             seasonComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             for (int i = 0; i < 5; i++)
             {
-                _rectangles[i] = new Rectangles(rnd.NextDouble() * 100, rnd.NextDouble() * 100, "");
+                _rectangles[i] = new Rectangles(rnd.NextDouble() * 100, rnd.NextDouble() * 100, "", rnd.Next(0, 100), rnd.Next(0, 100));
                 rectanglesListBox.Items.Add($"Rectangle {i + 1}");
 
                 _movies[i] = new Movie();
@@ -123,6 +123,9 @@ namespace Programming
             lenghtTextBox.Text = _currentRectangle.Lenght.ToString();
             widhtTextBox.Text = _currentRectangle.Widht.ToString();
             colorTextBox.Text = _currentRectangle.Color;
+            centerXTextBox.Text = _currentRectangle.Center.X.ToString();
+            centerYTextBox.Text = _currentRectangle.Center.Y.ToString();
+            idTextBox.Text = _currentRectangle.Id.ToString();
         }
 
         private void lenghtTextBox_TextChanged(object sender, EventArgs e)
@@ -276,6 +279,11 @@ namespace Programming
                 }
             }
             return index;
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

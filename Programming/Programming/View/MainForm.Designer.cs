@@ -62,6 +62,10 @@
             movieNameLabel = new Label();
             movieListBox = new ListBox();
             rectanglesGroupBox = new GroupBox();
+            centerYTextBox = new TextBox();
+            centerYLabel = new Label();
+            centerXTextBox = new TextBox();
+            centerXLabel = new Label();
             rectangleFindButton = new Button();
             rectanglesListBox = new ListBox();
             colorTextBox = new TextBox();
@@ -72,6 +76,8 @@
             lenghtLabel = new Label();
             mainFormBindingSource1 = new BindingSource(components);
             mainFormBindingSource = new BindingSource(components);
+            idLabel = new Label();
+            idTextBox = new TextBox();
             tabControl1.SuspendLayout();
             enumsTabPage.SuspendLayout();
             seasonGroupBox.SuspendLayout();
@@ -406,6 +412,12 @@
             // 
             // rectanglesGroupBox
             // 
+            rectanglesGroupBox.Controls.Add(idTextBox);
+            rectanglesGroupBox.Controls.Add(idLabel);
+            rectanglesGroupBox.Controls.Add(centerYTextBox);
+            rectanglesGroupBox.Controls.Add(centerYLabel);
+            rectanglesGroupBox.Controls.Add(centerXTextBox);
+            rectanglesGroupBox.Controls.Add(centerXLabel);
             rectanglesGroupBox.Controls.Add(rectangleFindButton);
             rectanglesGroupBox.Controls.Add(rectanglesListBox);
             rectanglesGroupBox.Controls.Add(colorTextBox);
@@ -420,6 +432,41 @@
             rectanglesGroupBox.TabIndex = 0;
             rectanglesGroupBox.TabStop = false;
             rectanglesGroupBox.Text = "Rectangles";
+            // 
+            // centerYTextBox
+            // 
+            centerYTextBox.Location = new Point(169, 264);
+            centerYTextBox.Name = "centerYTextBox";
+            centerYTextBox.ReadOnly = true;
+            centerYTextBox.Size = new Size(146, 27);
+            centerYTextBox.TabIndex = 11;
+            // 
+            // centerYLabel
+            // 
+            centerYLabel.AutoSize = true;
+            centerYLabel.Location = new Point(169, 241);
+            centerYLabel.Name = "centerYLabel";
+            centerYLabel.Size = new Size(67, 20);
+            centerYLabel.TabIndex = 10;
+            centerYLabel.Text = "Center Y:";
+            // 
+            // centerXTextBox
+            // 
+            centerXTextBox.Location = new Point(169, 208);
+            centerXTextBox.Name = "centerXTextBox";
+            centerXTextBox.ReadOnly = true;
+            centerXTextBox.Size = new Size(146, 27);
+            centerXTextBox.TabIndex = 9;
+            // 
+            // centerXLabel
+            // 
+            centerXLabel.AutoSize = true;
+            centerXLabel.Location = new Point(169, 185);
+            centerXLabel.Name = "centerXLabel";
+            centerXLabel.Size = new Size(68, 20);
+            centerXLabel.TabIndex = 8;
+            centerXLabel.Text = "Center X:";
+            centerXLabel.Click += label1_Click_1;
             // 
             // rectangleFindButton
             // 
@@ -500,6 +547,23 @@
             // 
             mainFormBindingSource.DataSource = typeof(MainForm);
             // 
+            // idLabel
+            // 
+            idLabel.AutoSize = true;
+            idLabel.Location = new Point(6, 333);
+            idLabel.Name = "idLabel";
+            idLabel.Size = new Size(29, 20);
+            idLabel.TabIndex = 12;
+            idLabel.Text = "Id: ";
+            // 
+            // idTextBox
+            // 
+            idTextBox.Location = new Point(6, 356);
+            idTextBox.Name = "idTextBox";
+            idTextBox.ReadOnly = true;
+            idTextBox.Size = new Size(125, 27);
+            idTextBox.TabIndex = 13;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -573,5 +637,11 @@
         private TextBox movieNameTextBox;
         private TextBox movieRateTextBox;
         private Label movieRateLabel;
+        private TextBox centerYTextBox;
+        private Label centerYLabel;
+        private TextBox centerXTextBox;
+        private Label centerXLabel;
+        private TextBox idTextBox;
+        private Label idLabel;
     }
 }
