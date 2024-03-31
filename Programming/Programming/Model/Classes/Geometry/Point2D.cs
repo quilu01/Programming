@@ -13,7 +13,7 @@ namespace Programming.Model.Classes
         public int X
         {
             get { return x;  }
-            private set
+            set
             {
                 if (Validator.AssertOnPositiveValue(value)) { x = value; }
             }
@@ -21,7 +21,7 @@ namespace Programming.Model.Classes
         public int Y
         {
             get { return y; }
-            private set
+            set
             {
                 if (Validator.AssertOnPositiveValue(value)) { y = value; }
             }

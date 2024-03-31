@@ -62,6 +62,8 @@
             movieNameLabel = new Label();
             movieListBox = new ListBox();
             rectanglesGroupBox = new GroupBox();
+            idTextBox = new TextBox();
+            idLabel = new Label();
             centerYTextBox = new TextBox();
             centerYLabel = new Label();
             centerXTextBox = new TextBox();
@@ -74,10 +76,25 @@
             widthLabel = new Label();
             lenghtTextBox = new TextBox();
             lenghtLabel = new Label();
+            rectanglesTabPage = new TabPage();
+            CanvasPanel = new Panel();
+            lenghtRectangleLabel = new Label();
+            WidhtRectangleLabel = new Label();
+            YRectangleLabel = new Label();
+            XRectangleLabel = new Label();
+            IdRectangleLabel = new Label();
+            LenghtPanelTextBox = new TextBox();
+            WidhtPanelTextBox = new TextBox();
+            YPanelTextBox = new TextBox();
+            XPanelTextBox = new TextBox();
+            IdPanelTextBox = new TextBox();
+            selectedRectangleLabel = new Label();
+            flatAddButton = new PictureBox();
+            flatDeleteButton = new PictureBox();
+            rectanglesPanelListBox = new ListBox();
+            rectanglesLabel = new Label();
             mainFormBindingSource1 = new BindingSource(components);
             mainFormBindingSource = new BindingSource(components);
-            idLabel = new Label();
-            idTextBox = new TextBox();
             tabControl1.SuspendLayout();
             enumsTabPage.SuspendLayout();
             seasonGroupBox.SuspendLayout();
@@ -86,6 +103,9 @@
             classesTabPage.SuspendLayout();
             moviesGroupBox.SuspendLayout();
             rectanglesGroupBox.SuspendLayout();
+            rectanglesTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)flatAddButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)flatDeleteButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mainFormBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mainFormBindingSource).BeginInit();
             SuspendLayout();
@@ -94,6 +114,7 @@
             // 
             tabControl1.Controls.Add(enumsTabPage);
             tabControl1.Controls.Add(classesTabPage);
+            tabControl1.Controls.Add(rectanglesTabPage);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -433,6 +454,23 @@
             rectanglesGroupBox.TabStop = false;
             rectanglesGroupBox.Text = "Rectangles";
             // 
+            // idTextBox
+            // 
+            idTextBox.Location = new Point(6, 356);
+            idTextBox.Name = "idTextBox";
+            idTextBox.ReadOnly = true;
+            idTextBox.Size = new Size(125, 27);
+            idTextBox.TabIndex = 13;
+            // 
+            // idLabel
+            // 
+            idLabel.AutoSize = true;
+            idLabel.Location = new Point(6, 333);
+            idLabel.Name = "idLabel";
+            idLabel.Size = new Size(29, 20);
+            idLabel.TabIndex = 12;
+            idLabel.Text = "Id: ";
+            // 
             // centerYTextBox
             // 
             centerYTextBox.Location = new Point(169, 264);
@@ -539,6 +577,174 @@
             lenghtLabel.TabIndex = 1;
             lenghtLabel.Text = "Lenght:";
             // 
+            // rectanglesTabPage
+            // 
+            rectanglesTabPage.Controls.Add(CanvasPanel);
+            rectanglesTabPage.Controls.Add(lenghtRectangleLabel);
+            rectanglesTabPage.Controls.Add(WidhtRectangleLabel);
+            rectanglesTabPage.Controls.Add(YRectangleLabel);
+            rectanglesTabPage.Controls.Add(XRectangleLabel);
+            rectanglesTabPage.Controls.Add(IdRectangleLabel);
+            rectanglesTabPage.Controls.Add(LenghtPanelTextBox);
+            rectanglesTabPage.Controls.Add(WidhtPanelTextBox);
+            rectanglesTabPage.Controls.Add(YPanelTextBox);
+            rectanglesTabPage.Controls.Add(XPanelTextBox);
+            rectanglesTabPage.Controls.Add(IdPanelTextBox);
+            rectanglesTabPage.Controls.Add(selectedRectangleLabel);
+            rectanglesTabPage.Controls.Add(flatAddButton);
+            rectanglesTabPage.Controls.Add(flatDeleteButton);
+            rectanglesTabPage.Controls.Add(rectanglesPanelListBox);
+            rectanglesTabPage.Controls.Add(rectanglesLabel);
+            rectanglesTabPage.Location = new Point(4, 29);
+            rectanglesTabPage.Name = "rectanglesTabPage";
+            rectanglesTabPage.Size = new Size(792, 417);
+            rectanglesTabPage.TabIndex = 2;
+            rectanglesTabPage.Text = "Rectangles";
+            rectanglesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // CanvasPanel
+            // 
+            CanvasPanel.BorderStyle = BorderStyle.FixedSingle;
+            CanvasPanel.Location = new Point(329, 3);
+            CanvasPanel.Name = "CanvasPanel";
+            CanvasPanel.Size = new Size(460, 411);
+            CanvasPanel.TabIndex = 15;
+            CanvasPanel.Paint += RectanglePanel_Paint;
+            // 
+            // lenghtRectangleLabel
+            // 
+            lenghtRectangleLabel.AutoSize = true;
+            lenghtRectangleLabel.Location = new Point(35, 390);
+            lenghtRectangleLabel.Name = "lenghtRectangleLabel";
+            lenghtRectangleLabel.Size = new Size(57, 20);
+            lenghtRectangleLabel.TabIndex = 14;
+            lenghtRectangleLabel.Text = "Height:";
+            // 
+            // WidhtRectangleLabel
+            // 
+            WidhtRectangleLabel.AutoSize = true;
+            WidhtRectangleLabel.Location = new Point(40, 357);
+            WidhtRectangleLabel.Name = "WidhtRectangleLabel";
+            WidhtRectangleLabel.Size = new Size(52, 20);
+            WidhtRectangleLabel.TabIndex = 13;
+            WidhtRectangleLabel.Text = "Widht:";
+            // 
+            // YRectangleLabel
+            // 
+            YRectangleLabel.AutoSize = true;
+            YRectangleLabel.Location = new Point(72, 324);
+            YRectangleLabel.Name = "YRectangleLabel";
+            YRectangleLabel.Size = new Size(20, 20);
+            YRectangleLabel.TabIndex = 12;
+            YRectangleLabel.Text = "Y:";
+            // 
+            // XRectangleLabel
+            // 
+            XRectangleLabel.AutoSize = true;
+            XRectangleLabel.Location = new Point(71, 291);
+            XRectangleLabel.Name = "XRectangleLabel";
+            XRectangleLabel.Size = new Size(21, 20);
+            XRectangleLabel.TabIndex = 11;
+            XRectangleLabel.Text = "X:";
+            // 
+            // IdRectangleLabel
+            // 
+            IdRectangleLabel.AutoSize = true;
+            IdRectangleLabel.Location = new Point(67, 258);
+            IdRectangleLabel.Name = "IdRectangleLabel";
+            IdRectangleLabel.Size = new Size(25, 20);
+            IdRectangleLabel.TabIndex = 10;
+            IdRectangleLabel.Text = "Id:";
+            IdRectangleLabel.Click += IdRectangleLabel_Click;
+            // 
+            // LenghtPanelTextBox
+            // 
+            LenghtPanelTextBox.Location = new Point(98, 387);
+            LenghtPanelTextBox.Name = "LenghtPanelTextBox";
+            LenghtPanelTextBox.Size = new Size(125, 27);
+            LenghtPanelTextBox.TabIndex = 9;
+            LenghtPanelTextBox.TextChanged += LenghtPanelTextBox_TextChanged;
+            // 
+            // WidhtPanelTextBox
+            // 
+            WidhtPanelTextBox.Location = new Point(98, 354);
+            WidhtPanelTextBox.Name = "WidhtPanelTextBox";
+            WidhtPanelTextBox.Size = new Size(125, 27);
+            WidhtPanelTextBox.TabIndex = 8;
+            WidhtPanelTextBox.TextChanged += WidhtPanelTextBox_TextChanged;
+            // 
+            // YPanelTextBox
+            // 
+            YPanelTextBox.Location = new Point(98, 321);
+            YPanelTextBox.Name = "YPanelTextBox";
+            YPanelTextBox.Size = new Size(125, 27);
+            YPanelTextBox.TabIndex = 7;
+            YPanelTextBox.TextChanged += YPanelTextBox_TextChanged;
+            // 
+            // XPanelTextBox
+            // 
+            XPanelTextBox.Location = new Point(98, 288);
+            XPanelTextBox.Name = "XPanelTextBox";
+            XPanelTextBox.Size = new Size(125, 27);
+            XPanelTextBox.TabIndex = 6;
+            XPanelTextBox.TextChanged += XPanelTextBox_TextChanged;
+            // 
+            // IdPanelTextBox
+            // 
+            IdPanelTextBox.Location = new Point(98, 255);
+            IdPanelTextBox.Name = "IdPanelTextBox";
+            IdPanelTextBox.ReadOnly = true;
+            IdPanelTextBox.Size = new Size(125, 27);
+            IdPanelTextBox.TabIndex = 5;
+            // 
+            // selectedRectangleLabel
+            // 
+            selectedRectangleLabel.AutoSize = true;
+            selectedRectangleLabel.Location = new Point(8, 232);
+            selectedRectangleLabel.Name = "selectedRectangleLabel";
+            selectedRectangleLabel.Size = new Size(135, 20);
+            selectedRectangleLabel.TabIndex = 4;
+            selectedRectangleLabel.Text = "Selected rectangle:";
+            // 
+            // flatAddButton
+            // 
+            flatAddButton.ImageLocation = "C:\\Users\\nikita\\source\\repos\\Programming\\Programming\\Programming\\Model\\Resources\\add_icon.png";
+            flatAddButton.Location = new Point(177, 204);
+            flatAddButton.Name = "flatAddButton";
+            flatAddButton.Size = new Size(24, 26);
+            flatAddButton.TabIndex = 3;
+            flatAddButton.TabStop = false;
+            flatAddButton.Click += flatAddButton_Click;
+            // 
+            // flatDeleteButton
+            // 
+            flatDeleteButton.ImageLocation = "C:\\Users\\nikita\\source\\repos\\Programming\\Programming\\Programming\\Model\\Resources\\delete_icon.png";
+            flatDeleteButton.Location = new Point(207, 204);
+            flatDeleteButton.Name = "flatDeleteButton";
+            flatDeleteButton.Size = new Size(25, 27);
+            flatDeleteButton.TabIndex = 2;
+            flatDeleteButton.TabStop = false;
+            flatDeleteButton.Click += flatDeleteButton_Click;
+            // 
+            // rectanglesPanelListBox
+            // 
+            rectanglesPanelListBox.FormattingEnabled = true;
+            rectanglesPanelListBox.ItemHeight = 20;
+            rectanglesPanelListBox.Location = new Point(8, 40);
+            rectanglesPanelListBox.Name = "rectanglesPanelListBox";
+            rectanglesPanelListBox.Size = new Size(315, 144);
+            rectanglesPanelListBox.TabIndex = 1;
+            rectanglesPanelListBox.SelectedIndexChanged += rectanglesPanelListBox_SelectedIndexChanged;
+            // 
+            // rectanglesLabel
+            // 
+            rectanglesLabel.AutoSize = true;
+            rectanglesLabel.Location = new Point(8, 17);
+            rectanglesLabel.Name = "rectanglesLabel";
+            rectanglesLabel.Size = new Size(84, 20);
+            rectanglesLabel.TabIndex = 0;
+            rectanglesLabel.Text = "Rectangles:";
+            // 
             // mainFormBindingSource1
             // 
             mainFormBindingSource1.DataSource = typeof(MainForm);
@@ -546,23 +752,6 @@
             // mainFormBindingSource
             // 
             mainFormBindingSource.DataSource = typeof(MainForm);
-            // 
-            // idLabel
-            // 
-            idLabel.AutoSize = true;
-            idLabel.Location = new Point(6, 333);
-            idLabel.Name = "idLabel";
-            idLabel.Size = new Size(29, 20);
-            idLabel.TabIndex = 12;
-            idLabel.Text = "Id: ";
-            // 
-            // idTextBox
-            // 
-            idTextBox.Location = new Point(6, 356);
-            idTextBox.Name = "idTextBox";
-            idTextBox.ReadOnly = true;
-            idTextBox.Size = new Size(125, 27);
-            idTextBox.TabIndex = 13;
             // 
             // MainForm
             // 
@@ -587,6 +776,10 @@
             moviesGroupBox.PerformLayout();
             rectanglesGroupBox.ResumeLayout(false);
             rectanglesGroupBox.PerformLayout();
+            rectanglesTabPage.ResumeLayout(false);
+            rectanglesTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)flatAddButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)flatDeleteButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)mainFormBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)mainFormBindingSource).EndInit();
             ResumeLayout(false);
@@ -643,5 +836,22 @@
         private Label centerXLabel;
         private TextBox idTextBox;
         private Label idLabel;
+        private TabPage rectanglesTabPage;
+        private TextBox LenghtPanelTextBox;
+        private TextBox WidhtPanelTextBox;
+        private TextBox YPanelTextBox;
+        private TextBox XPanelTextBox;
+        private TextBox IdPanelTextBox;
+        private Label selectedRectangleLabel;
+        private PictureBox flatAddButton;
+        private PictureBox flatDeleteButton;
+        private ListBox rectanglesPanelListBox;
+        private Label rectanglesLabel;
+        private Label lenghtRectangleLabel;
+        private Label WidhtRectangleLabel;
+        private Label YRectangleLabel;
+        private Label XRectangleLabel;
+        private Label IdRectangleLabel;
+        private Panel CanvasPanel;
     }
 }

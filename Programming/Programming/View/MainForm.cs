@@ -1,6 +1,8 @@
 
 using Programming.Model.Classes;
+using Programming.Model.Classes.Geometry;
 using System.Drawing.Text;
+using System.Numerics;
 
 namespace Programming
 {
@@ -22,21 +24,26 @@ namespace Programming
             seasonComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             for (int i = 0; i < 5; i++)
             {
-                _rectangles[i] = new Rectangles(rnd.NextDouble() * 100, rnd.NextDouble() * 100, "", rnd.Next(0, 100), rnd.Next(0, 100));
+                _rectangles[i] = new Rectangles(rnd.Next(0, 100), rnd.Next(0, 100), "", rnd.Next(0, 100), rnd.Next(0, 100));
                 rectanglesListBox.Items.Add($"Rectangle {i + 1}");
 
                 _movies[i] = new Movie();
                 _movies[i].Rate = rnd.NextDouble() * 10;
                 movieListBox.Items.Add($"Movie {i + 1}");
             }
+            
+            rectanglesPanelListBox.SelectedIndex = -1;
 
         }
+        private List<Rectangles> _listRectangles = new List<Rectangles>(10);
+        private Rectangles _currentListRectangle;
         private Rectangles[] _rectangles = new Rectangles[5];
         private Rectangles _currentRectangle;
         Random rnd = new Random();
         private Movie[] _movies = new Movie[5];
         private Movie _currentMovie;
-
+        private List<Panel> _rectanglePanels = new List<Panel>(10);
+        
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -120,7 +127,7 @@ namespace Programming
         private void rectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentRectangle = _rectangles[rectanglesListBox.SelectedIndex];
-            lenghtTextBox.Text = _currentRectangle.Lenght.ToString();
+            lenghtTextBox.Text = _currentRectangle.Height.ToString();
             widhtTextBox.Text = _currentRectangle.Widht.ToString();
             colorTextBox.Text = _currentRectangle.Color;
             centerXTextBox.Text = _currentRectangle.Center.X.ToString();
@@ -128,11 +135,11 @@ namespace Programming
             idTextBox.Text = _currentRectangle.Id.ToString();
         }
 
-        private void lenghtTextBox_TextChanged(object sender, EventArgs e)
+        private void lenghtTextBox_TextChanged(object sender, EventArgs e)  
         {
             try
             {
-                _currentRectangle.Lenght = Convert.ToDouble(lenghtTextBox.Text);
+                _currentRectangle.Height = Convert.ToInt32(lenghtTextBox.Text);
                 lenghtTextBox.BackColor = Color.White;
             }
             catch
@@ -145,7 +152,7 @@ namespace Programming
         {
             try
             {
-                _currentRectangle.Widht = Convert.ToDouble(widhtTextBox.Text);
+                _currentRectangle.Widht = Convert.ToInt32(widhtTextBox.Text);
                 widhtTextBox.BackColor = Color.White;
             }
             catch
@@ -284,6 +291,157 @@ namespace Programming
         private void label1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void IdRectangleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flatAddButton_Click(object sender, EventArgs e)
+        {
+            _listRectangles.Add(RectangleFactory.New(CanvasPanel.Size.Width, CanvasPanel.Size.Height));
+            rectanglesPanelListBox.Items.Add($"(ID: {_listRectangles[^1].Id}, X: {_listRectangles[^1].Center.X}, Y: {_listRectangles[^1].Center.Y}, Widht: {_listRectangles[^1].Widht}, Height: {_listRectangles[^1].Height})");
+            Panel panel = new Panel();
+            panel.Location = new Point(_listRectangles[^1].Center.X, _listRectangles[^1].Center.Y);
+            panel.Height = (int)_listRectangles[^1].Height;
+            panel.Width = (int)_listRectangles[^1].Widht;
+            panel.BackColor = Color.FromArgb(127, 127, 255, 127);
+            _rectanglePanels.Add(panel);
+            CanvasPanel.Controls.Add(panel);
+            RefreshPanel();
+        }
+
+        private void RectanglePanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flatDeleteButton_Click(object sender, EventArgs e)
+        {
+            if (rectanglesPanelListBox.SelectedIndex != -1)
+            {
+                _listRectangles.RemoveAt(rectanglesPanelListBox.SelectedIndex);
+                _rectanglePanels.RemoveAt(rectanglesPanelListBox.SelectedIndex);
+                CanvasPanel.Controls.RemoveAt(rectanglesPanelListBox.SelectedIndex);
+                rectanglesPanelListBox.Items.RemoveAt(rectanglesPanelListBox.SelectedIndex);
+                rectanglesPanelListBox.SelectedIndex = -1;
+                IdPanelTextBox.Text = "0";
+                XPanelTextBox.Text = "0";
+                YPanelTextBox.Text = "0";
+                WidhtPanelTextBox.Text = "0";
+                LenghtPanelTextBox.Text = "0";
+
+            }
+            RefreshPanel();
+        }
+
+        private void rectanglesPanelListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rectanglesPanelListBox.SelectedIndex != -1)
+            {
+                _currentListRectangle = _listRectangles[rectanglesPanelListBox.SelectedIndex];
+                IdPanelTextBox.Text = Convert.ToString(_currentListRectangle.Id);
+                XPanelTextBox.Text = Convert.ToString(_currentListRectangle.Center.X);
+                YPanelTextBox.Text = Convert.ToString(_currentListRectangle.Center.Y);
+                WidhtPanelTextBox.Text = Convert.ToString(_currentListRectangle.Widht);
+                LenghtPanelTextBox.Text = Convert.ToString(_currentListRectangle.Height);
+            }
+        }
+
+        private void XPanelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentListRectangle.Center.X = Convert.ToInt32(XPanelTextBox.Text);
+                
+                XPanelTextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                XPanelTextBox.BackColor = Color.LightPink;
+            }
+            RefreshPanel();
+        }
+
+        private void RefreshPanel()
+        {
+            
+            for (int i = 0; i < _listRectangles.Count;i++)
+            {
+                bool CollisionFlag = true;
+                for (int j = 0; j < _listRectangles.Count; j++)
+                {
+                    if (i == j) { continue; }
+                    if (CollisionManager.IsCollision(_listRectangles[i], _listRectangles[j]))
+                    {
+                        _rectanglePanels[i].BackColor = Color.FromArgb(127, 255, 127, 127);
+                        _rectanglePanels[j].BackColor = Color.FromArgb(127, 255, 127, 127);
+                        CollisionFlag = false;
+                    }
+                }
+                if (CollisionFlag)
+                {
+                    _rectanglePanels[i].BackColor = Color.FromArgb(127, 127, 255, 127);
+                }
+            }
+            CanvasPanel.Controls.Clear();
+            for (int i = 0; i < _listRectangles.Count; i++)
+            {
+                Panel panel = new Panel();
+                panel.Location = new Point(_listRectangles[i].Center.X, _listRectangles[i].Center.Y);
+                panel.Width = (int)_listRectangles[i].Widht;
+                panel.Height = (int)_listRectangles[i].Height;
+                panel.BackColor = _rectanglePanels[i].BackColor;
+                _rectanglePanels.Add(panel);
+                CanvasPanel.Controls.Add(panel);
+                rectanglesPanelListBox.Items[i] = $"(ID: {_listRectangles[i].Id}, X: {_listRectangles[i].Center.X}, Y: {_listRectangles[i].Center.Y}, Widht: {_listRectangles[i].Widht}, Height: {_listRectangles[i].Height})";
+            }
+        }
+
+        private void YPanelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentListRectangle.Center.Y = Convert.ToInt32(YPanelTextBox.Text);
+                
+                YPanelTextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                YPanelTextBox.BackColor = Color.LightPink;
+            }
+            RefreshPanel();
+        }
+
+        private void WidhtPanelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentListRectangle.Widht = Convert.ToInt32(WidhtPanelTextBox.Text);
+                
+                WidhtPanelTextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                WidhtPanelTextBox.BackColor = Color.LightPink;
+            }
+            RefreshPanel();
+        }
+
+        private void LenghtPanelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentListRectangle.Height = Convert.ToInt32(LenghtPanelTextBox.Text);
+                
+                LenghtPanelTextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                LenghtPanelTextBox.BackColor = Color.LightPink;
+            }
+            RefreshPanel();
         }
     }
 }
