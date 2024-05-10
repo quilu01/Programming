@@ -10,44 +10,7 @@ namespace Programming
     {
         public MainForm()
         {
-            InitializeComponent();
-            
-            
-            
-            
-            
-
-        }
-        
-        
-        Random rnd = new Random();
-        
-        
-        
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
+            InitializeComponent();        
+        }        
     }
 }
