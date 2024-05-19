@@ -10,7 +10,8 @@ namespace Programming
     {
         public MainForm()
         {
-            InitializeComponent();        
-        }        
+            InitializeComponent();
+        }    
+        
     }
 }

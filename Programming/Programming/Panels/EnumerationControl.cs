@@ -25,6 +25,7 @@ namespace Programming.Panels
             enumerationListBox.Items.AddRange(enumNames);
             enumerationListBox.SelectedIndex = 0;
         }
+
         private void enumerationListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (enumerationListBox.SelectedItem)

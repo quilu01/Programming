@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes.Geometry
 {
+    /// <summary>
+    /// Создает экземпляр класса <see cref="Rectangles"/>
+    /// </summary>
     public class RectangleFactory
     {
-        
+        /// <summary>
+        /// Создает экземпляр класса <see cref="Rectangles"/>
+        /// </summary>
+        /// <param name="CanvasWidht">Ширина панели.</param>
+        /// <param name="CanvasHeight">Длина панели.</param>
+        /// <returns>Возвращает экземпляр класса <see cref="Rectangles"/></returns>
         public static Rectangles New(int CanvasWidht, int CanvasHeight)
         {
             Random rnd = new Random();

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming
 {
-    
+    /// <summary>
+    /// Перечисление компаний.
+    /// </summary>
         public enum Manufactures
         {
             Samsung,
