@@ -41,6 +41,7 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             renameLabel = new Label();
             renameTextBox = new TextBox();
+            sortButton = new Button();
             SuspendLayout();
             // 
             // nameListBox
@@ -150,12 +151,23 @@
             renameTextBox.TabIndex = 13;
             renameTextBox.TextChanged += renameTextBox_TextChanged;
             // 
+            // sortButton
+            // 
+            sortButton.Location = new Point(259, 215);
+            sortButton.Name = "sortButton";
+            sortButton.Size = new Size(94, 29);
+            sortButton.TabIndex = 14;
+            sortButton.Text = "Sort";
+            sortButton.UseVisualStyleBackColor = true;
+            sortButton.Click += sortButton_Click;
+            // 
             // CityBuildingsControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Controls.Add(sortButton);
             Controls.Add(renameTextBox);
             Controls.Add(renameLabel);
             Controls.Add(deleteButton);
@@ -189,5 +201,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label renameLabel;
         private TextBox renameTextBox;
+        private Button sortButton;
     }
 }
