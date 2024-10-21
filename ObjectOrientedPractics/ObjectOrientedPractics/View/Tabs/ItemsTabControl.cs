@@ -48,23 +48,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _currentItem = _items[itemsListBox.SelectedIndex];
-            nameTextBox.Text = _currentItem.Name;
-            idTextBox.Text = _currentItem._id.ToString();
-            descriptionTextBox.Text = _currentItem.Info;
-            costTextBox.Text = _currentItem.Cost.ToString();
+            if (itemsListBox.SelectedIndex != -1)
+            { 
+                _currentItem = _items[itemsListBox.SelectedIndex];
+                nameTextBox.Text = _currentItem.Name;
+                idTextBox.Text = _currentItem._id.ToString();
+                descriptionTextBox.Text = _currentItem.Info;
+                costTextBox.Text = _currentItem.Cost.ToString();
+            }
+            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _items.Remove(_currentItem);
-                itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
-                itemsListBox.SelectedIndex = -1;
-                Refresh();
-            }
-            catch { }
+            
+            _items.Remove(_currentItem);
+            itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
+            itemsListBox.SelectedIndex = -1;
+            Refresh();
 
         }
 

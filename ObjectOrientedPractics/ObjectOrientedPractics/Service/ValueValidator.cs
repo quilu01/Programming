@@ -31,5 +31,17 @@ namespace ObjectOrientedPractics.Service
                 return true;
             }
         }
+        public static bool AssertOnValue(int  value, int maxValue, string propertyName)
+        {
+            propertyName = nameof(propertyName);
+            if (value < 0 || value > maxValue)
+            {
+                throw new ArgumentException($"{propertyName} должен быть меньше {maxValue}");
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

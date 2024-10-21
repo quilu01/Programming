@@ -21,11 +21,8 @@ namespace ObjectOrientedPractics.Model
         /// ФИО клиента.
         /// </summary>
         private string _fullname;
-        /// <summary>
-        /// Адрес клиента.
-        /// </summary>
-        private string _address;
-        private int _idCount = -1;
+        
+        private static int _idCount = -1;
         /// <summary>
         /// Возвраащает и задает ФИО клиента.
         /// </summary>
@@ -36,13 +33,9 @@ namespace ObjectOrientedPractics.Model
             set { if (ValueValidator.AssertStringOnLength(value, 200, Fullname)) _fullname = value; }
         }
         /// <summary>
-        /// Возвраащает и задает адрес клиента.
+        /// Возвращает и задает адрес клиента.
         /// </summary>
-        public string Address
-        {
-            get { return _address; }
-            set { if (ValueValidator.AssertStringOnLength(value, 500, Address)) _address = value; }
-        }
+        public Address Address { get; set; }
         public int IdCount
         {
             get { _idCount++; return _idCount;  }
@@ -52,19 +45,18 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">ФИО клиента.</param>
         /// <param name="address">Адрес клиента.</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
-            _id = _idCount;
-            _idCount++;
+            _id = IdCount;
+            
             Fullname = fullname;
             Address = address;
         }
         public Customer()
         {
-            _id = _idCount;
-            _idCount++;
+            _id = IdCount;
             Fullname = "Null";
-            Address = "Null";
+            Address Address = new Address();
         }
     }
 

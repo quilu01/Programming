@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Controls;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -17,8 +18,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
         }
-        List<Customer> _customers = new();
-        public Customer _currentCustomer;
+        private List<Customer> _customers = new List<Customer>(10);
+        private Customer _currentCustomer;
+
+
         private void Refresh()
         {
             customersListBox.Items.Clear();
@@ -30,17 +33,25 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void customersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _currentCustomer = _customers[customersListBox.SelectedIndex];
-            fullnameTextBox.Text = _currentCustomer.Fullname;
-            idTextBox.Text = _currentCustomer._id.ToString();
-            addressTextBox.Text = _currentCustomer.Address;
+            if (customersListBox.SelectedIndex != -1)
+            {
+                
+                _currentCustomer = _customers[customersListBox.SelectedIndex];
+                addressControl.Address = _currentCustomer.Address;
+                
+                fullnameTextBox.Text = _currentCustomer.Fullname;
+                idTextBox.Text = _currentCustomer._id.ToString();
+            }
+            
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
             Customer customer = new Customer();
+            customer.Address = new Address();
             _customers.Add(customer);
             customersListBox.Items.Add(customer.Fullname);
+            _currentCustomer = customer;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -72,17 +83,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        private void addressTextBox_TextChanged(object sender, EventArgs e)
+        private void addressControl_Load(object sender, EventArgs e)
         {
-            try
-            {
-                _currentCustomer.Address = addressTextBox.Text;
-                addressTextBox.BackColor = Color.White;
-            }
-            catch
-            {
-                addressTextBox.BackColor = Color.LightPink;
-            }
+
         }
     }
 }
