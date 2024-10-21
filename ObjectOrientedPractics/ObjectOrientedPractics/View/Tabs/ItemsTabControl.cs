@@ -17,8 +17,17 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
         }
-        List<Item> _items = new();
-        public Item _currentItem;
+        private List<Item> _items;
+        public List<Item> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                Refresh();
+            }
+        }
+        private Item _currentItem;
         private void selectedItemGroupBox_Enter(object sender, EventArgs e)
         {
 

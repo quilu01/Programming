@@ -18,9 +18,17 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
         }
-        private List<Customer> _customers = new List<Customer>(10);
+        private List<Customer> _customers;
         private Customer _currentCustomer;
-
+        public List<Customer> Customers
+        {
+            get { return _customers; }
+            set
+            {
+                _customers = value;
+                Refresh();
+            }
+        }
 
         private void Refresh()
         {
