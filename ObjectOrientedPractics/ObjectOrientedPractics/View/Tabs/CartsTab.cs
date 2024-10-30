@@ -22,31 +22,11 @@ namespace ObjectOrientedPractics.View.Tabs
         private Item _currentItem;
         private Item _currentCartItem;
         private Customer _currentCustomer;
-        public List<Customer> Customers
-        {
-            get { return _customers; }
-            set
-            {
-                if (value != null)
-                {
-                    _customers = value;
-                    Refresh();
-                }
-            }
-        }
-        public List<Item> Items
-        {
-            get { return _items; }
-            set
-            {
-                if (value != null)
-                {
-                    _items = value;
-                    Refresh();
-                }
-            }
-        }
-        public void Refresh()
+        public List<Customer> Customers { get; set; }
+        
+        public List<Item> Items { get; set; }
+        
+        public void RefreshData()
         {
             itemsListBox.Items.Clear();
             customerComboBox.Items.Clear();
@@ -120,7 +100,10 @@ namespace ObjectOrientedPractics.View.Tabs
             if (_currentCustomer != null && _currentCustomer.Cart.Items.Count > 0)
             {
                 Order order = new Order(_currentCustomer);
-                _currentCustomer.Cart.Items.Clear();
+                _currentCustomer.Orders.Add(order);
+
+                _currentCustomer.Cart = new Cart();
+                
                 cartListBox.Items.Clear();
             }
         }

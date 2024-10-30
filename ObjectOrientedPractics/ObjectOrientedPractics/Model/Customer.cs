@@ -37,6 +37,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Address Address { get; set; }
         public Cart Cart { get; set; }
+        public List<Order> Orders { get; set; }
         public int IdCount
         {
             get { _idCount++; return _idCount;  }
@@ -50,6 +51,7 @@ namespace ObjectOrientedPractics.Model
         {
             _id = IdCount;
             Cart = new Cart();
+            Orders = new List<Order>(5);
             Fullname = fullname;
             Address = address;
         }
@@ -59,6 +61,7 @@ namespace ObjectOrientedPractics.Model
             Fullname = "Иван Иванович Иванов";
             Address Address = new Address();
             Cart = new Cart();
+            Orders = new List<Order>(5);
         }
     }
 

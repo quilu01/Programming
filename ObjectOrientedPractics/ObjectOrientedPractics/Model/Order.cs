@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectOrientedPractics.Model.Enumerations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace ObjectOrientedPractics.Model
         private readonly DateTime _date;
         public int Id { get; set; }
         public DateTime Date { get; set; }
+        public OrderStatus Status { get; set; }
         public int IdCount
         {
             get { _idCount++; return _idCount; }
@@ -29,6 +31,7 @@ namespace ObjectOrientedPractics.Model
             Address = customer.Address;
             Cart = customer.Cart;
             Amount = Cart.Amount;
+            Status = OrderStatus.New;
         }
 
     }

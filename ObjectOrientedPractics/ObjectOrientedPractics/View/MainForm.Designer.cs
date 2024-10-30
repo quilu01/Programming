@@ -35,10 +35,13 @@
             itemsTab = new TabPage();
             itemsTabControl = new View.Tabs.ItemsTab();
             tabControl1 = new TabControl();
+            orderTab = new TabPage();
+            ordersTab1 = new View.Tabs.OrdersTab();
             cartTab.SuspendLayout();
             customersTab.SuspendLayout();
             itemsTab.SuspendLayout();
             tabControl1.SuspendLayout();
+            orderTab.SuspendLayout();
             SuspendLayout();
             // 
             // cartTab
@@ -108,6 +111,7 @@
             tabControl1.Controls.Add(itemsTab);
             tabControl1.Controls.Add(customersTab);
             tabControl1.Controls.Add(cartTab);
+            tabControl1.Controls.Add(orderTab);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -115,6 +119,25 @@
             tabControl1.Size = new Size(800, 450);
             tabControl1.TabIndex = 0;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+            // 
+            // orderTab
+            // 
+            orderTab.Controls.Add(ordersTab1);
+            orderTab.Location = new Point(4, 29);
+            orderTab.Name = "orderTab";
+            orderTab.Size = new Size(792, 417);
+            orderTab.TabIndex = 3;
+            orderTab.Text = "orderTab";
+            orderTab.UseVisualStyleBackColor = true;
+            // 
+            // ordersTab1
+            // 
+            ordersTab1.Customers = null;
+            ordersTab1.Dock = DockStyle.Fill;
+            ordersTab1.Location = new Point(0, 0);
+            ordersTab1.Name = "ordersTab1";
+            ordersTab1.Size = new Size(792, 417);
+            ordersTab1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -129,6 +152,7 @@
             customersTab.ResumeLayout(false);
             itemsTab.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
+            orderTab.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -141,5 +165,7 @@
         private View.Tabs.ItemsTab itemsTabControl;
         private TabControl tabControl1;
         private View.Tabs.CartsTab cartsTab1;
+        private TabPage orderTab;
+        private View.Tabs.OrdersTab ordersTab1;
     }
 }
