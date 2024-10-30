@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enumerations;
 
 namespace ObjectOrientedPractics.Model
 {
@@ -26,11 +27,13 @@ namespace ObjectOrientedPractics.Model
         /// Описание продукта.
         /// </summary>
         private string _info;
+        
         /// <summary>
         /// Цена продукта.
         /// </summary>
         private double _cost;
         private static int _idCount = -1;
+        public Category Category { get; set; }
         public int IdCount
         {
             get { _idCount++; return _idCount; }
@@ -65,21 +68,21 @@ namespace ObjectOrientedPractics.Model
         /// <param name="name">Название продукта.</param>
         /// <param name="info">Описание продукта.</param>
         /// <param name="cost">Цена продукта.</param>
-        public Item(string name, string info, double cost)
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
             _id = IdCount;
-            
+            Category = category;
         }
         public Item()
         {
             _id = IdCount;
-            
-            Cost = 0;
-            Info = "Null";
-            Name = "Null";
+            Category = Category.Food;
+            Cost = 47;
+            Info = "Без информации";
+            Name = "Хлеб";
         }
 
     }

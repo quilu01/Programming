@@ -36,6 +36,7 @@ namespace ObjectOrientedPractics.Model
         /// Возвращает и задает адрес клиента.
         /// </summary>
         public Address Address { get; set; }
+        public Cart Cart { get; set; }
         public int IdCount
         {
             get { _idCount++; return _idCount;  }
@@ -48,15 +49,16 @@ namespace ObjectOrientedPractics.Model
         public Customer(string fullname, Address address)
         {
             _id = IdCount;
-            
+            Cart = new Cart();
             Fullname = fullname;
             Address = address;
         }
         public Customer()
         {
             _id = IdCount;
-            Fullname = "Null";
+            Fullname = "Иван Иванович Иванов";
             Address Address = new Address();
+            Cart = new Cart();
         }
     }
 

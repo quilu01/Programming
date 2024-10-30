@@ -49,12 +49,12 @@ namespace ObjectOrientedPractics.Model
         }
         public Address()
         {
-            Index = 000000;
-            Country = "None";
-            City = "None";
-            Street = "None";
-            Building = "None";
-            Apartament = "None";
+            Index = 123456;
+            Country = "Россия";
+            City = "Томск";
+            Street = "Лыткина";
+            Building = "18";
+            Apartament = "404";
         }
         public Address(int index, string country, string city, string street, string building, string apartament)
         {

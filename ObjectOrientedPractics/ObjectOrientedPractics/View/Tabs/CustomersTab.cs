@@ -12,9 +12,9 @@ using ObjectOrientedPractics.View.Controls;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
-    public partial class CustomersTabControl : UserControl
+    public partial class CustomersTab : UserControl
     {
-        public CustomersTabControl()
+        public CustomersTab()
         {
             InitializeComponent();
         }
@@ -25,8 +25,11 @@ namespace ObjectOrientedPractics.View.Tabs
             get { return _customers; }
             set
             {
-                _customers = value;
-                Refresh();
+                if (value != null)
+                {
+                    _customers = value;
+                    Refresh();
+                }
             }
         }
 

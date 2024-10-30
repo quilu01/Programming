@@ -35,6 +35,8 @@
             addButton = new Button();
             itemsListBox = new ListBox();
             selectedItemGroupBox = new GroupBox();
+            categoryComboBox = new ComboBox();
+            categoryLabel = new Label();
             descriptionTextBox = new TextBox();
             descriptionLabel = new Label();
             nameTextBox = new TextBox();
@@ -127,6 +129,8 @@
             // 
             selectedItemGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             selectedItemGroupBox.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            selectedItemGroupBox.Controls.Add(categoryComboBox);
+            selectedItemGroupBox.Controls.Add(categoryLabel);
             selectedItemGroupBox.Controls.Add(descriptionTextBox);
             selectedItemGroupBox.Controls.Add(descriptionLabel);
             selectedItemGroupBox.Controls.Add(nameTextBox);
@@ -142,6 +146,25 @@
             selectedItemGroupBox.TabStop = false;
             selectedItemGroupBox.Text = "Selected Item";
             selectedItemGroupBox.Enter += selectedItemGroupBox_Enter;
+            // 
+            // categoryComboBox
+            // 
+            categoryComboBox.FormattingEnabled = true;
+            categoryComboBox.Location = new Point(271, 33);
+            categoryComboBox.Name = "categoryComboBox";
+            categoryComboBox.Size = new Size(151, 28);
+            categoryComboBox.TabIndex = 9;
+            categoryComboBox.SelectedIndexChanged += categoryComboBox_SelectedIndexChanged;
+            // 
+            // categoryLabel
+            // 
+            categoryLabel.AutoSize = true;
+            categoryLabel.Location = new Point(193, 36);
+            categoryLabel.Name = "categoryLabel";
+            categoryLabel.Size = new Size(72, 20);
+            categoryLabel.TabIndex = 8;
+            categoryLabel.Text = "Category:";
+            categoryLabel.Click += label1_Click;
             // 
             // descriptionTextBox
             // 
@@ -248,5 +271,7 @@
         private TextBox nameTextBox;
         private Label nameLabel;
         private TableLayoutPanel tableLayoutPanel1;
+        private Label categoryLabel;
+        public ComboBox categoryComboBox;
     }
 }

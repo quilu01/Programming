@@ -1,6 +1,6 @@
 ﻿namespace ObjectOrientedPractics.View.Tabs
 {
-    partial class CustomersTabControl
+    partial class CustomersTab
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

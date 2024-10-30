@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enumerations;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -16,6 +17,7 @@ namespace ObjectOrientedPractics.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
+            categoryComboBox.Items.AddRange(Enum.GetNames(typeof(Category)));
         }
         private List<Item> _items;
         public List<Item> Items
@@ -23,8 +25,11 @@ namespace ObjectOrientedPractics.View.Tabs
             get { return _items; }
             set
             {
-                _items = value;
-                Refresh();
+                if (value != null)
+                {
+                    _items = value;
+                    Refresh();
+                }
             }
         }
         private Item _currentItem;
@@ -32,6 +37,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
 
         }
+
         private void Refresh()
         {
             itemsListBox.Items.Clear();
@@ -58,19 +64,21 @@ namespace ObjectOrientedPractics.View.Tabs
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (itemsListBox.SelectedIndex != -1)
-            { 
+            {
+                
                 _currentItem = _items[itemsListBox.SelectedIndex];
                 nameTextBox.Text = _currentItem.Name;
                 idTextBox.Text = _currentItem._id.ToString();
                 descriptionTextBox.Text = _currentItem.Info;
                 costTextBox.Text = _currentItem.Cost.ToString();
+                categoryComboBox.SelectedIndex = (int) _currentItem.Category;
             }
-            
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            
+
             _items.Remove(_currentItem);
             itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
             itemsListBox.SelectedIndex = -1;
@@ -101,9 +109,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             catch
             {
-                nameTextBox.BackColor= Color.LightPink;
+                nameTextBox.BackColor = Color.LightPink;
             }
-            
+
         }
 
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
@@ -116,6 +124,24 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 descriptionTextBox.BackColor = Color.LightPink;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentItem.Category = (Category)Enum.Parse(typeof(Category), (string)categoryComboBox.SelectedItem);
+                
+            }
+            catch
+            {
+                
             }
         }
     }
