@@ -32,12 +32,9 @@ namespace ObjectOrientedPractics.Model
         /// Цена продукта.
         /// </summary>
         private double _cost;
-        private static int _idCount = -1;
+        
         public Category Category { get; set; }
-        public int IdCount
-        {
-            get { _idCount++; return _idCount; }
-        }
+        
         /// <summary>
         /// Возвраащает и задает название продукта.
         /// </summary>
@@ -73,12 +70,12 @@ namespace ObjectOrientedPractics.Model
             Name = name;
             Info = info;
             Cost = cost;
-            _id = IdCount;
+            _id = IdGenerator.ItemId;
             Category = category;
         }
         public Item()
         {
-            _id = IdCount;
+            _id = IdGenerator.ItemId;
             Category = Category.Food;
             Cost = 47;
             Info = "Без информации";

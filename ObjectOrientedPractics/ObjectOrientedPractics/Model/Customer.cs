@@ -22,7 +22,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         private string _fullname;
         
-        private static int _idCount = -1;
+        
         /// <summary>
         /// Возвраащает и задает ФИО клиента.
         /// </summary>
@@ -38,10 +38,7 @@ namespace ObjectOrientedPractics.Model
         public Address Address { get; set; }
         public Cart Cart { get; set; }
         public List<Order> Orders { get; set; }
-        public int IdCount
-        {
-            get { _idCount++; return _idCount;  }
-        }
+        
         /// <summary>
         /// Создает экземпляр класса <see cref="Customer"./>
         /// </summary>
@@ -49,7 +46,7 @@ namespace ObjectOrientedPractics.Model
         /// <param name="address">Адрес клиента.</param>
         public Customer(string fullname, Address address)
         {
-            _id = IdCount;
+            _id = IdGenerator.CustomerId;
             Cart = new Cart();
             Orders = new List<Order>(5);
             Fullname = fullname;
@@ -57,7 +54,7 @@ namespace ObjectOrientedPractics.Model
         }
         public Customer()
         {
-            _id = IdCount;
+            _id = IdGenerator.CustomerId;
             Fullname = "Иван Иванович Иванов";
             Address Address = new Address();
             Cart = new Cart();

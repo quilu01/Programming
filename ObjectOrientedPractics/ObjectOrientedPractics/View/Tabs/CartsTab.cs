@@ -60,7 +60,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     for (int i = 0; i < _currentCustomer.Cart.Items.Count; i++)
                     {
-                        cartListBox.Items.Add(_currentCustomer.Cart.Items[i]);
+                        cartListBox.Items.Add(_currentCustomer.Cart.Items[i].Name);
                     }
                 }
             }
@@ -72,7 +72,10 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _currentItem = Items[itemsListBox.SelectedIndex];
+            if (itemsListBox.SelectedIndex != -1)
+            {
+                _currentItem = Items[itemsListBox.SelectedIndex];
+            }
         }
 
         private void addButton_Click(object sender, EventArgs e)
