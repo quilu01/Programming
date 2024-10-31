@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address1 = new Model.Address();
+            Model.Address address2 = new Model.Address();
             splitContainer1 = new SplitContainer();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -42,6 +42,7 @@
             idTextBox = new TextBox();
             idLabel = new Label();
             selectedCustomerLabel = new Label();
+            priorityCheckBox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(priorityCheckBox);
             splitContainer1.Panel2.Controls.Add(addressControl);
             splitContainer1.Panel2.Controls.Add(fullnameTextBox);
             splitContainer1.Panel2.Controls.Add(fullnameLabel);
@@ -147,13 +149,13 @@
             // 
             // addressControl
             // 
-            address1.Apartament = "None";
-            address1.Building = "None";
-            address1.City = "None";
-            address1.Country = "None";
-            address1.Index = 0;
-            address1.Street = "None";
-            addressControl.Address = address1;
+            address2.Apartament = "None";
+            address2.Building = "None";
+            address2.City = "None";
+            address2.Country = "None";
+            address2.Index = 123456;
+            address2.Street = "None";
+            addressControl.Address = address2;
             addressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             addressControl.Location = new Point(-3, 102);
             addressControl.Name = "addressControl";
@@ -205,12 +207,23 @@
             selectedCustomerLabel.TabIndex = 0;
             selectedCustomerLabel.Text = "Selected Customer";
             // 
-            // CustomersTabControl
+            // priorityCheckBox
+            // 
+            priorityCheckBox.AutoSize = true;
+            priorityCheckBox.Location = new Point(285, 39);
+            priorityCheckBox.Name = "priorityCheckBox";
+            priorityCheckBox.Size = new Size(92, 24);
+            priorityCheckBox.TabIndex = 7;
+            priorityCheckBox.Text = "Is Priority";
+            priorityCheckBox.UseVisualStyleBackColor = true;
+            priorityCheckBox.CheckedChanged += priorityCheckBox_CheckedChanged;
+            // 
+            // CustomersTab
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(splitContainer1);
-            Name = "CustomersTabControl";
+            Name = "CustomersTab";
             Size = new Size(792, 417);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
@@ -238,5 +251,6 @@
         private Label idLabel;
         private Label selectedCustomerLabel;
         private Controls.AddressControl addressControl;
+        private CheckBox priorityCheckBox;
     }
 }

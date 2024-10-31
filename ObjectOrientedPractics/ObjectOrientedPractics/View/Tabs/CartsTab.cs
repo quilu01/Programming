@@ -102,13 +102,22 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (_currentCustomer != null && _currentCustomer.Cart.Items.Count > 0)
             {
-                Order order = new Order(_currentCustomer);
-                _currentCustomer.Orders.Add(order);
-
+                if (_currentCustomer.IsPriority == false)
+                {
+                    Order order = new Order(_currentCustomer);
+                    _currentCustomer.Orders.Add(order);
+                    MessageBox.Show("not priority");
+                }
+                else
+                {
+                    PriorityOrder order = new PriorityOrder(_currentCustomer);
+                    _currentCustomer.Orders.Add(order);
+                }
                 _currentCustomer.Cart = new Cart();
-                
+
                 cartListBox.Items.Clear();
             }
+            AmountRefresh();
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -116,6 +125,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _currentCustomer?.Cart.Items.Clear();
             cartListBox.Items.Clear();
             AmountRefresh();
+
         }
     }
 }

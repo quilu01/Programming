@@ -46,14 +46,14 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (customersListBox.SelectedIndex != -1)
             {
-                
+
                 _currentCustomer = _customers[customersListBox.SelectedIndex];
                 addressControl.Address = _currentCustomer.Address;
-                
+                priorityCheckBox.Checked = _currentCustomer.IsPriority;
                 fullnameTextBox.Text = _currentCustomer.Fullname;
                 idTextBox.Text = _currentCustomer._id.ToString();
             }
-            
+
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -97,6 +97,21 @@ namespace ObjectOrientedPractics.View.Tabs
         private void addressControl_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void priorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_currentCustomer != null)
+            {
+                if (priorityCheckBox.Checked)
+                {
+                    _currentCustomer.IsPriority = true;
+                }
+                else
+                {
+                    _currentCustomer.IsPriority = false;
+                }
+            }
         }
     }
 }

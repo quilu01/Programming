@@ -32,6 +32,8 @@ namespace ObjectOrientedPractics.Model
             get { return _fullname; }
             set { if (ValueValidator.AssertStringOnLength(value, 200, Fullname)) _fullname = value; }
         }
+        
+        public bool IsPriority { get; set; } = false;
         /// <summary>
         /// Возвращает и задает адрес клиента.
         /// </summary>

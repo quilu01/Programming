@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             dataGridView = new DataGridView();
+            IdColumn = new DataGridViewTextBoxColumn();
+            DateColumn = new DataGridViewTextBoxColumn();
+            FullnameColumn = new DataGridViewTextBoxColumn();
+            AddressColumn = new DataGridViewTextBoxColumn();
+            CostColumn = new DataGridViewTextBoxColumn();
+            StatusColumn = new DataGridViewTextBoxColumn();
             addressControl1 = new Controls.AddressControl();
             groupBox = new GroupBox();
             statusComboBox = new ComboBox();
@@ -41,14 +47,15 @@
             itemsListBox = new ListBox();
             amountLabel = new Label();
             amountTextLabel = new Label();
-            IdColumn = new DataGridViewTextBoxColumn();
-            DateColumn = new DataGridViewTextBoxColumn();
-            FullnameColumn = new DataGridViewTextBoxColumn();
-            AddressColumn = new DataGridViewTextBoxColumn();
-            CostColumn = new DataGridViewTextBoxColumn();
-            StatusColumn = new DataGridViewTextBoxColumn();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            priorityGroupBox = new GroupBox();
+            deliveryDateLabel = new Label();
+            deliveryTimeLabel = new Label();
+            deliveryDatePicker = new DateTimePicker();
+            deliveryTimeComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             groupBox.SuspendLayout();
+            priorityGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView
@@ -66,29 +73,82 @@
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(647, 762);
+            dataGridView.Size = new Size(647, 679);
             dataGridView.TabIndex = 0;
             dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             // 
+            // IdColumn
+            // 
+            IdColumn.HeaderText = "Id заказа";
+            IdColumn.MinimumWidth = 6;
+            IdColumn.Name = "IdColumn";
+            IdColumn.ReadOnly = true;
+            IdColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            IdColumn.Width = 125;
+            // 
+            // DateColumn
+            // 
+            DateColumn.HeaderText = "Дата создания";
+            DateColumn.MinimumWidth = 6;
+            DateColumn.Name = "DateColumn";
+            DateColumn.ReadOnly = true;
+            DateColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            DateColumn.Width = 125;
+            // 
+            // FullnameColumn
+            // 
+            FullnameColumn.HeaderText = "ФИО покупателя";
+            FullnameColumn.MinimumWidth = 6;
+            FullnameColumn.Name = "FullnameColumn";
+            FullnameColumn.ReadOnly = true;
+            FullnameColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            FullnameColumn.Width = 125;
+            // 
+            // AddressColumn
+            // 
+            AddressColumn.HeaderText = "Адрес доставки";
+            AddressColumn.MinimumWidth = 6;
+            AddressColumn.Name = "AddressColumn";
+            AddressColumn.ReadOnly = true;
+            AddressColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            AddressColumn.Width = 125;
+            // 
+            // CostColumn
+            // 
+            CostColumn.HeaderText = "Общая стоимость";
+            CostColumn.MinimumWidth = 6;
+            CostColumn.Name = "CostColumn";
+            CostColumn.ReadOnly = true;
+            CostColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            CostColumn.Width = 125;
+            // 
+            // StatusColumn
+            // 
+            StatusColumn.HeaderText = "Статус";
+            StatusColumn.MinimumWidth = 6;
+            StatusColumn.Name = "StatusColumn";
+            StatusColumn.ReadOnly = true;
+            StatusColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            StatusColumn.Width = 125;
+            // 
             // addressControl1
             // 
-            address2.Apartament = "None";
-            address2.Building = "None";
-            address2.City = "None";
-            address2.Country = "None";
-            address2.Index = 123456;
-            address2.Street = "None";
-            addressControl1.Address = address2;
+            address1.Apartament = "None";
+            address1.Building = "None";
+            address1.City = "None";
+            address1.Country = "None";
+            address1.Index = 123456;
+            address1.Street = "None";
+            addressControl1.Address = address1;
             addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             addressControl1.Enabled = false;
             addressControl1.Location = new Point(656, 142);
             addressControl1.Name = "addressControl1";
-            addressControl1.Size = new Size(603, 162);
+            addressControl1.Size = new Size(661, 162);
             addressControl1.TabIndex = 1;
             // 
             // groupBox
             // 
-            groupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox.Controls.Add(statusComboBox);
             groupBox.Controls.Add(createdTextBox);
             groupBox.Controls.Add(idTextBox);
@@ -97,7 +157,7 @@
             groupBox.Controls.Add(idLabel);
             groupBox.Location = new Point(656, 3);
             groupBox.Name = "groupBox";
-            groupBox.Size = new Size(603, 133);
+            groupBox.Size = new Size(255, 133);
             groupBox.TabIndex = 2;
             groupBox.TabStop = false;
             groupBox.Text = "Selected Order";
@@ -161,7 +221,7 @@
             itemsListBox.FormattingEnabled = true;
             itemsListBox.Location = new Point(656, 310);
             itemsListBox.Name = "itemsListBox";
-            itemsListBox.Size = new Size(603, 264);
+            itemsListBox.Size = new Size(661, 264);
             itemsListBox.TabIndex = 3;
             // 
             // amountLabel
@@ -170,7 +230,7 @@
             amountLabel.AutoSize = true;
             amountLabel.Font = new Font("Swis721 Blk BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             amountLabel.ImageAlign = ContentAlignment.TopLeft;
-            amountLabel.Location = new Point(1210, 603);
+            amountLabel.Location = new Point(1268, 603);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(35, 36);
             amountLabel.TabIndex = 10;
@@ -182,64 +242,67 @@
             amountTextLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             amountTextLabel.AutoSize = true;
             amountTextLabel.Font = new Font("Swis721 Hv BT", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            amountTextLabel.Location = new Point(1153, 577);
+            amountTextLabel.Location = new Point(1211, 577);
             amountTextLabel.Name = "amountTextLabel";
             amountTextLabel.Size = new Size(106, 27);
             amountTextLabel.TabIndex = 9;
             amountTextLabel.Text = "Amount:";
             // 
-            // IdColumn
+            // priorityGroupBox
             // 
-            IdColumn.HeaderText = "Id заказа";
-            IdColumn.MinimumWidth = 6;
-            IdColumn.Name = "IdColumn";
-            IdColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            IdColumn.Width = 125;
+            priorityGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            priorityGroupBox.Controls.Add(deliveryDateLabel);
+            priorityGroupBox.Controls.Add(deliveryTimeLabel);
+            priorityGroupBox.Controls.Add(deliveryDatePicker);
+            priorityGroupBox.Controls.Add(deliveryTimeComboBox);
+            priorityGroupBox.Location = new Point(917, 11);
+            priorityGroupBox.Name = "priorityGroupBox";
+            priorityGroupBox.Size = new Size(400, 125);
+            priorityGroupBox.TabIndex = 11;
+            priorityGroupBox.TabStop = false;
+            priorityGroupBox.Text = "Priority options";
+            priorityGroupBox.Visible = false;
             // 
-            // DateColumn
+            // deliveryDateLabel
             // 
-            DateColumn.HeaderText = "Дата создания";
-            DateColumn.MinimumWidth = 6;
-            DateColumn.Name = "DateColumn";
-            DateColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            DateColumn.Width = 125;
+            deliveryDateLabel.AutoSize = true;
+            deliveryDateLabel.Location = new Point(6, 74);
+            deliveryDateLabel.Name = "deliveryDateLabel";
+            deliveryDateLabel.Size = new Size(100, 20);
+            deliveryDateLabel.TabIndex = 3;
+            deliveryDateLabel.Text = "Delivery date:";
             // 
-            // FullnameColumn
+            // deliveryTimeLabel
             // 
-            FullnameColumn.HeaderText = "ФИО покупателя";
-            FullnameColumn.MinimumWidth = 6;
-            FullnameColumn.Name = "FullnameColumn";
-            FullnameColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            FullnameColumn.Width = 125;
+            deliveryTimeLabel.AutoSize = true;
+            deliveryTimeLabel.Location = new Point(6, 29);
+            deliveryTimeLabel.Name = "deliveryTimeLabel";
+            deliveryTimeLabel.Size = new Size(100, 20);
+            deliveryTimeLabel.TabIndex = 2;
+            deliveryTimeLabel.Text = "Delivery time:";
             // 
-            // AddressColumn
+            // deliveryDatePicker
             // 
-            AddressColumn.HeaderText = "Адрес доставки";
-            AddressColumn.MinimumWidth = 6;
-            AddressColumn.Name = "AddressColumn";
-            AddressColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            AddressColumn.Width = 125;
+            deliveryDatePicker.Location = new Point(112, 69);
+            deliveryDatePicker.Name = "deliveryDatePicker";
+            deliveryDatePicker.Size = new Size(282, 27);
+            deliveryDatePicker.TabIndex = 1;
+            deliveryDatePicker.ValueChanged += deliveryDatePicker_ValueChanged;
             // 
-            // CostColumn
+            // deliveryTimeComboBox
             // 
-            CostColumn.HeaderText = "Общая стоимость";
-            CostColumn.MinimumWidth = 6;
-            CostColumn.Name = "CostColumn";
-            CostColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            CostColumn.Width = 125;
-            // 
-            // StatusColumn
-            // 
-            StatusColumn.HeaderText = "Статус";
-            StatusColumn.MinimumWidth = 6;
-            StatusColumn.Name = "StatusColumn";
-            StatusColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            StatusColumn.Width = 125;
+            deliveryTimeComboBox.FormattingEnabled = true;
+            deliveryTimeComboBox.Location = new Point(112, 26);
+            deliveryTimeComboBox.Name = "deliveryTimeComboBox";
+            deliveryTimeComboBox.Size = new Size(282, 28);
+            deliveryTimeComboBox.TabIndex = 0;
+            deliveryTimeComboBox.SelectedIndexChanged += deliveryTimeComboBox_SelectedIndexChanged;
             // 
             // OrdersTab
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(priorityGroupBox);
             Controls.Add(amountLabel);
             Controls.Add(amountTextLabel);
             Controls.Add(itemsListBox);
@@ -247,10 +310,12 @@
             Controls.Add(addressControl1);
             Controls.Add(dataGridView);
             Name = "OrdersTab";
-            Size = new Size(1262, 768);
+            Size = new Size(1320, 685);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             groupBox.ResumeLayout(false);
             groupBox.PerformLayout();
+            priorityGroupBox.ResumeLayout(false);
+            priorityGroupBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,5 +340,11 @@
         private DataGridViewTextBoxColumn AddressColumn;
         private DataGridViewTextBoxColumn CostColumn;
         private DataGridViewTextBoxColumn StatusColumn;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private GroupBox priorityGroupBox;
+        private Label deliveryDateLabel;
+        private Label deliveryTimeLabel;
+        private DateTimePicker deliveryDatePicker;
+        private ComboBox deliveryTimeComboBox;
     }
 }
