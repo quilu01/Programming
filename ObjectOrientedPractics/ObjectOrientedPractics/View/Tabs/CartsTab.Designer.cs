@@ -31,6 +31,12 @@
             itemsListBox = new ListBox();
             customerLabel = new Label();
             groupBox = new GroupBox();
+            totalLabel = new Label();
+            totalTextLabel = new Label();
+            discountAmountLabel = new Label();
+            discountAmountTextLabel = new Label();
+            discountsLabel = new Label();
+            discountsCheckedListBox = new CheckedListBox();
             customerComboBox = new ComboBox();
             clearButton = new Button();
             removeButton = new Button();
@@ -49,7 +55,7 @@
             itemsListBox.FormattingEnabled = true;
             itemsListBox.Location = new Point(6, 26);
             itemsListBox.Name = "itemsListBox";
-            itemsListBox.Size = new Size(271, 344);
+            itemsListBox.Size = new Size(271, 584);
             itemsListBox.TabIndex = 0;
             itemsListBox.SelectedIndexChanged += itemsListBox_SelectedIndexChanged;
             // 
@@ -64,6 +70,12 @@
             // 
             // groupBox
             // 
+            groupBox.Controls.Add(totalLabel);
+            groupBox.Controls.Add(totalTextLabel);
+            groupBox.Controls.Add(discountAmountLabel);
+            groupBox.Controls.Add(discountAmountTextLabel);
+            groupBox.Controls.Add(discountsLabel);
+            groupBox.Controls.Add(discountsCheckedListBox);
             groupBox.Controls.Add(customerComboBox);
             groupBox.Controls.Add(clearButton);
             groupBox.Controls.Add(removeButton);
@@ -78,10 +90,78 @@
             groupBox.Dock = DockStyle.Fill;
             groupBox.Location = new Point(0, 0);
             groupBox.Name = "groupBox";
-            groupBox.Size = new Size(818, 497);
+            groupBox.Size = new Size(1062, 650);
             groupBox.TabIndex = 2;
             groupBox.TabStop = false;
             groupBox.Text = "Items";
+            // 
+            // totalLabel
+            // 
+            totalLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            totalLabel.AutoSize = true;
+            totalLabel.Font = new Font("Swis721 Blk BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            totalLabel.ImageAlign = ContentAlignment.TopLeft;
+            totalLabel.Location = new Point(1001, 605);
+            totalLabel.Name = "totalLabel";
+            totalLabel.Size = new Size(35, 36);
+            totalLabel.TabIndex = 17;
+            totalLabel.Text = "0";
+            totalLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // totalTextLabel
+            // 
+            totalTextLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            totalTextLabel.AutoSize = true;
+            totalTextLabel.Font = new Font("Swis721 Blk BT", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            totalTextLabel.Location = new Point(966, 578);
+            totalTextLabel.Name = "totalTextLabel";
+            totalTextLabel.Size = new Size(84, 27);
+            totalTextLabel.TabIndex = 16;
+            totalTextLabel.Text = "Total:";
+            // 
+            // discountAmountLabel
+            // 
+            discountAmountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            discountAmountLabel.AutoSize = true;
+            discountAmountLabel.Font = new Font("Swis721 Blk BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            discountAmountLabel.ImageAlign = ContentAlignment.TopLeft;
+            discountAmountLabel.Location = new Point(1001, 473);
+            discountAmountLabel.Name = "discountAmountLabel";
+            discountAmountLabel.Size = new Size(35, 36);
+            discountAmountLabel.TabIndex = 15;
+            discountAmountLabel.Text = "0";
+            discountAmountLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // discountAmountTextLabel
+            // 
+            discountAmountTextLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            discountAmountTextLabel.AutoSize = true;
+            discountAmountTextLabel.Font = new Font("Swis721 Blk BT", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            discountAmountTextLabel.Location = new Point(813, 446);
+            discountAmountTextLabel.Name = "discountAmountTextLabel";
+            discountAmountTextLabel.Size = new Size(237, 27);
+            discountAmountTextLabel.TabIndex = 14;
+            discountAmountTextLabel.Text = "Discount amount:";
+            // 
+            // discountsLabel
+            // 
+            discountsLabel.AutoSize = true;
+            discountsLabel.Location = new Point(283, 446);
+            discountsLabel.Name = "discountsLabel";
+            discountsLabel.Size = new Size(76, 20);
+            discountsLabel.TabIndex = 13;
+            discountsLabel.Text = "Discounts:";
+            // 
+            // discountsCheckedListBox
+            // 
+            discountsCheckedListBox.BackColor = SystemColors.Control;
+            discountsCheckedListBox.BorderStyle = BorderStyle.None;
+            discountsCheckedListBox.FormattingEnabled = true;
+            discountsCheckedListBox.Location = new Point(283, 465);
+            discountsCheckedListBox.Name = "discountsCheckedListBox";
+            discountsCheckedListBox.Size = new Size(379, 176);
+            discountsCheckedListBox.TabIndex = 12;
+            discountsCheckedListBox.SelectedIndexChanged += discountsCheckedListBox_SelectedIndexChanged;
             // 
             // customerComboBox
             // 
@@ -89,14 +169,14 @@
             customerComboBox.FormattingEnabled = true;
             customerComboBox.Location = new Point(364, 23);
             customerComboBox.Name = "customerComboBox";
-            customerComboBox.Size = new Size(448, 28);
+            customerComboBox.Size = new Size(692, 28);
             customerComboBox.TabIndex = 11;
             customerComboBox.SelectedIndexChanged += customerComboBox_SelectedIndexChanged;
             // 
             // clearButton
             // 
-            clearButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            clearButton.Location = new Point(586, 341);
+            clearButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            clearButton.Location = new Point(830, 414);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(107, 29);
             clearButton.TabIndex = 10;
@@ -106,8 +186,8 @@
             // 
             // removeButton
             // 
-            removeButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            removeButton.Location = new Point(699, 341);
+            removeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            removeButton.Location = new Point(943, 414);
             removeButton.Name = "removeButton";
             removeButton.Size = new Size(107, 29);
             removeButton.TabIndex = 9;
@@ -117,11 +197,11 @@
             // 
             // amountLabel
             // 
-            amountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            amountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             amountLabel.AutoSize = true;
             amountLabel.Font = new Font("Swis721 Blk BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             amountLabel.ImageAlign = ContentAlignment.TopLeft;
-            amountLabel.Location = new Point(757, 301);
+            amountLabel.Location = new Point(1001, 374);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(35, 36);
             amountLabel.TabIndex = 8;
@@ -130,8 +210,7 @@
             // 
             // orderButton
             // 
-            orderButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            orderButton.Location = new Point(283, 341);
+            orderButton.Location = new Point(283, 414);
             orderButton.Name = "orderButton";
             orderButton.Size = new Size(107, 29);
             orderButton.TabIndex = 7;
@@ -141,10 +220,10 @@
             // 
             // amountTextLabel
             // 
-            amountTextLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            amountTextLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             amountTextLabel.AutoSize = true;
             amountTextLabel.Font = new Font("Swis721 Hv BT", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            amountTextLabel.Location = new Point(700, 275);
+            amountTextLabel.Location = new Point(944, 348);
             amountTextLabel.Name = "amountTextLabel";
             amountTextLabel.Size = new Size(106, 27);
             amountTextLabel.TabIndex = 6;
@@ -152,11 +231,11 @@
             // 
             // cartListBox
             // 
-            cartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cartListBox.FormattingEnabled = true;
             cartListBox.Location = new Point(283, 102);
             cartListBox.Name = "cartListBox";
-            cartListBox.Size = new Size(523, 164);
+            cartListBox.Size = new Size(767, 244);
             cartListBox.TabIndex = 5;
             // 
             // cartLabel
@@ -171,7 +250,7 @@
             // addButton
             // 
             addButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            addButton.Location = new Point(6, 459);
+            addButton.Location = new Point(6, 612);
             addButton.Name = "addButton";
             addButton.Size = new Size(94, 29);
             addButton.TabIndex = 2;
@@ -185,7 +264,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(groupBox);
             Name = "CartsTab";
-            Size = new Size(818, 497);
+            Size = new Size(1062, 650);
             groupBox.ResumeLayout(false);
             groupBox.PerformLayout();
             ResumeLayout(false);
@@ -205,5 +284,11 @@
         private Button removeButton;
         private Button clearButton;
         private ComboBox customerComboBox;
+        private Label discountAmountLabel;
+        private Label discountAmountTextLabel;
+        private Label discountsLabel;
+        private CheckedListBox discountsCheckedListBox;
+        private Label totalLabel;
+        private Label totalTextLabel;
     }
 }

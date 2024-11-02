@@ -53,6 +53,9 @@
             deliveryTimeLabel = new Label();
             deliveryDatePicker = new DateTimePicker();
             deliveryTimeComboBox = new ComboBox();
+            totalColumn = new DataGridViewTextBoxColumn();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             groupBox.SuspendLayout();
             priorityGroupBox.SuspendLayout();
@@ -66,14 +69,14 @@
             dataGridView.AllowUserToResizeRows = false;
             dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, DateColumn, FullnameColumn, AddressColumn, CostColumn, StatusColumn });
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, DateColumn, FullnameColumn, AddressColumn, CostColumn, StatusColumn, totalColumn });
             dataGridView.Location = new Point(3, 3);
             dataGridView.MultiSelect = false;
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(647, 679);
+            dataGridView.Size = new Size(647, 705);
             dataGridView.TabIndex = 0;
             dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             // 
@@ -298,10 +301,44 @@
             deliveryTimeComboBox.TabIndex = 0;
             deliveryTimeComboBox.SelectedIndexChanged += deliveryTimeComboBox_SelectedIndexChanged;
             // 
+            // totalColumn
+            // 
+            totalColumn.HeaderText = "Итого";
+            totalColumn.MinimumWidth = 6;
+            totalColumn.Name = "totalColumn";
+            totalColumn.ReadOnly = true;
+            totalColumn.Width = 125;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Swis721 Blk BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ImageAlign = ContentAlignment.TopLeft;
+            label1.Location = new Point(1268, 665);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 36);
+            label1.TabIndex = 13;
+            label1.Text = "0";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Swis721 Hv BT", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(1211, 639);
+            label2.Name = "label2";
+            label2.Size = new Size(106, 27);
+            label2.TabIndex = 12;
+            label2.Text = "Amount:";
+            // 
             // OrdersTab
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
+            Controls.Add(label2);
             Controls.Add(priorityGroupBox);
             Controls.Add(amountLabel);
             Controls.Add(amountTextLabel);
@@ -310,7 +347,7 @@
             Controls.Add(addressControl1);
             Controls.Add(dataGridView);
             Name = "OrdersTab";
-            Size = new Size(1320, 685);
+            Size = new Size(1320, 711);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             groupBox.ResumeLayout(false);
             groupBox.PerformLayout();
@@ -346,5 +383,8 @@
         private Label deliveryTimeLabel;
         private DateTimePicker deliveryDatePicker;
         private ComboBox deliveryTimeComboBox;
+        private DataGridViewTextBoxColumn totalColumn;
+        private Label label1;
+        private Label label2;
     }
 }

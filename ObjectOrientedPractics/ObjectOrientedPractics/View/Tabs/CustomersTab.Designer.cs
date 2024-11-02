@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address5 = new Model.Address();
             splitContainer1 = new SplitContainer();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -36,13 +36,17 @@
             deleteButton = new Button();
             customersListBox = new ListBox();
             customersLabel = new Label();
+            priorityCheckBox = new CheckBox();
             addressControl = new Controls.AddressControl();
             fullnameTextBox = new TextBox();
             fullnameLabel = new Label();
             idTextBox = new TextBox();
             idLabel = new Label();
             selectedCustomerLabel = new Label();
-            priorityCheckBox = new CheckBox();
+            discountsListBox = new ListBox();
+            discountLabel = new Label();
+            addDiscountButton = new Button();
+            removeDiscountButton = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +69,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(removeDiscountButton);
+            splitContainer1.Panel2.Controls.Add(addDiscountButton);
+            splitContainer1.Panel2.Controls.Add(discountLabel);
+            splitContainer1.Panel2.Controls.Add(discountsListBox);
             splitContainer1.Panel2.Controls.Add(priorityCheckBox);
             splitContainer1.Panel2.Controls.Add(addressControl);
             splitContainer1.Panel2.Controls.Add(fullnameTextBox);
@@ -147,19 +155,30 @@
             customersLabel.TabIndex = 0;
             customersLabel.Text = "Customers";
             // 
+            // priorityCheckBox
+            // 
+            priorityCheckBox.AutoSize = true;
+            priorityCheckBox.Location = new Point(285, 39);
+            priorityCheckBox.Name = "priorityCheckBox";
+            priorityCheckBox.Size = new Size(92, 24);
+            priorityCheckBox.TabIndex = 7;
+            priorityCheckBox.Text = "Is Priority";
+            priorityCheckBox.UseVisualStyleBackColor = true;
+            priorityCheckBox.CheckedChanged += priorityCheckBox_CheckedChanged;
+            // 
             // addressControl
             // 
-            address2.Apartament = "None";
-            address2.Building = "None";
-            address2.City = "None";
-            address2.Country = "None";
-            address2.Index = 123456;
-            address2.Street = "None";
-            addressControl.Address = address2;
+            address5.Apartament = "None";
+            address5.Building = "None";
+            address5.City = "None";
+            address5.Country = "None";
+            address5.Index = 123456;
+            address5.Street = "None";
+            addressControl.Address = address5;
             addressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             addressControl.Location = new Point(-3, 102);
             addressControl.Name = "addressControl";
-            addressControl.Size = new Size(464, 312);
+            addressControl.Size = new Size(464, 159);
             addressControl.TabIndex = 6;
             addressControl.Load += addressControl_Load;
             // 
@@ -207,16 +226,43 @@
             selectedCustomerLabel.TabIndex = 0;
             selectedCustomerLabel.Text = "Selected Customer";
             // 
-            // priorityCheckBox
+            // discountsListBox
             // 
-            priorityCheckBox.AutoSize = true;
-            priorityCheckBox.Location = new Point(285, 39);
-            priorityCheckBox.Name = "priorityCheckBox";
-            priorityCheckBox.Size = new Size(92, 24);
-            priorityCheckBox.TabIndex = 7;
-            priorityCheckBox.Text = "Is Priority";
-            priorityCheckBox.UseVisualStyleBackColor = true;
-            priorityCheckBox.CheckedChanged += priorityCheckBox_CheckedChanged;
+            discountsListBox.FormattingEnabled = true;
+            discountsListBox.Location = new Point(3, 287);
+            discountsListBox.Name = "discountsListBox";
+            discountsListBox.Size = new Size(332, 124);
+            discountsListBox.TabIndex = 8;
+            discountsListBox.SelectedIndexChanged += discountsListBox_SelectedIndexChanged;
+            // 
+            // discountLabel
+            // 
+            discountLabel.AutoSize = true;
+            discountLabel.Location = new Point(3, 264);
+            discountLabel.Name = "discountLabel";
+            discountLabel.Size = new Size(76, 20);
+            discountLabel.TabIndex = 9;
+            discountLabel.Text = "Discounts:";
+            // 
+            // addDiscountButton
+            // 
+            addDiscountButton.Location = new Point(341, 287);
+            addDiscountButton.Name = "addDiscountButton";
+            addDiscountButton.Size = new Size(94, 29);
+            addDiscountButton.TabIndex = 10;
+            addDiscountButton.Text = "Add";
+            addDiscountButton.UseVisualStyleBackColor = true;
+            addDiscountButton.Click += addDiscountButton_Click;
+            // 
+            // removeDiscountButton
+            // 
+            removeDiscountButton.Location = new Point(341, 322);
+            removeDiscountButton.Name = "removeDiscountButton";
+            removeDiscountButton.Size = new Size(94, 29);
+            removeDiscountButton.TabIndex = 11;
+            removeDiscountButton.Text = "Remove";
+            removeDiscountButton.UseVisualStyleBackColor = true;
+            removeDiscountButton.Click += removeDiscountButton_Click;
             // 
             // CustomersTab
             // 
@@ -252,5 +298,9 @@
         private Label selectedCustomerLabel;
         private Controls.AddressControl addressControl;
         private CheckBox priorityCheckBox;
+        private Button removeDiscountButton;
+        private Button addDiscountButton;
+        private Label discountLabel;
+        private ListBox discountsListBox;
     }
 }

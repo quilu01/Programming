@@ -7,22 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     public class Order
     {
         private readonly int _id;
-        
+
         private readonly DateTime _date;
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public OrderStatus Status { get; set; }
-        
+
         public Address Address { get; set; }
         public Cart Cart { get; set; }
         public double Amount { get; set; }
+        public double Total {  get; set; }
 
-        public Order (Customer customer)
+        public Order(Customer customer, double total)
         {
             Id = IdGenerator.OrderId;
             Date = DateTime.Now;
@@ -30,6 +31,7 @@ namespace ObjectOrientedPractics.Model
             Cart = customer.Cart;
             Amount = Cart.Amount;
             Status = OrderStatus.New;
+            Total = total;
         }
 
     }

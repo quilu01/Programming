@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enumerations;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -39,7 +40,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         _orders.Add(order);
                         amount += order.Amount;
                         string address = $"{customer.Address.Index} {customer.Address.Country} {customer.Address.City} {customer.Address.Street} {customer.Address.Building} {customer.Address.Apartament}";
-                        dataGridView.Rows.Add(order.Id, order.Date.ToString(), customer.Fullname, address, order.Amount, order.Status);
+                        dataGridView.Rows.Add(order.Id, order.Date.ToString(), customer.Fullname, address, order.Amount, order.Status, order.Total);
                     }
                 }
 
@@ -62,7 +63,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentOrder = _orders[dataGridView.SelectedRows[0].Index];
                 if (_currentOrder.GetType() == typeof(PriorityOrder)) 
                 {
-                    MessageBox.Show("priority order selected");
+                    
                     _currentPriorityOrder = (PriorityOrder)_orders[dataGridView.SelectedRows[0].Index];
                     priorityGroupBox.Visible = true;
                     deliveryDatePicker.Value = _currentPriorityOrder.DesiredDate;
@@ -70,7 +71,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
                 else
                 {
-                    MessageBox.Show("priority order not selected");
+                    
                     _currentPriorityOrder = null;
                     priorityGroupBox.Visible = false;
                 }

@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Discounts;
 using ObjectOrientedPractics.View.Controls;
+using ObjectOrientedPractics.Model.Forms;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -32,7 +34,19 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
             }
         }
-
+        private List<IDiscount> _discounts;
+        public List<IDiscount> Discounts
+        {
+            get
+            {
+                return _discounts;
+            }
+            set
+            {
+                _discounts = value;
+                UpdateDiscounts();
+            }
+        }
         private void Refresh()
         {
             customersListBox.Items.Clear();
@@ -52,6 +66,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 priorityCheckBox.Checked = _currentCustomer.IsPriority;
                 fullnameTextBox.Text = _currentCustomer.Fullname;
                 idTextBox.Text = _currentCustomer._id.ToString();
+                Discounts = _currentCustomer.Discounts;
             }
 
         }
@@ -111,6 +126,45 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     _currentCustomer.IsPriority = false;
                 }
+            }
+        }
+
+        private void discountsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (Discounts == null) return;
+            using (DiscountsForm discountForm = new DiscountsForm())
+            {
+                if (discountForm.ShowDialog() == DialogResult.OK)
+                {
+                    Discounts.Add(discountForm.PercentDiscount);
+                    discountsListBox.Items.Add(discountForm.PercentDiscount.Info);
+                }
+            }
+        }
+
+        private void removeDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (Discounts == null || discountsListBox.SelectedItem == null) return;
+            if (discountsListBox.SelectedIndex == 0)
+            {
+                MessageBox.Show("Нельзя удалить накопительную скидку!");
+                return;
+            }
+            Discounts.RemoveAt(discountsListBox.SelectedIndex);
+            discountsListBox.Items.Remove(discountsListBox.SelectedItem);
+        }
+        private void UpdateDiscounts()
+        {
+            discountsListBox.Items.Clear();
+            if (Discounts == null) return;
+            for (int i = 0; i < Discounts.Count; i++)
+            {
+                discountsListBox.Items.Add(Discounts[i].Info);
             }
         }
     }

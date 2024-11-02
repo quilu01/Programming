@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     public class PriorityOrder : Order
     {
@@ -14,11 +14,11 @@ namespace ObjectOrientedPractics.Model
         private DateTime _desiredDate;
         public int DesiredTime;
         public DateTime DesiredDate;
-        public PriorityOrder(Customer customer) : base(customer)
+        public PriorityOrder(Customer customer, double total) : base(customer, total)
         {
             DesiredTime = 0;
             DesiredDate = DateTime.Today.Date;
-            MessageBox.Show(this.Id.ToString());
+            MessageBox.Show(Id.ToString());
         }
     }
 }

@@ -43,5 +43,16 @@ namespace ObjectOrientedPractics.Service
                 return true;
             }
         }
+        public static bool AssertOnPositiveValue(int value, string propertyName)
+        {
+            if (value >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException($"{propertyName} должен быть больше 0");
+            }
+        }
     }
 }

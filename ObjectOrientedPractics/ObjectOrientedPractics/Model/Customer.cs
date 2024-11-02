@@ -1,4 +1,6 @@
-﻿using ObjectOrientedPractics.Service;
+﻿using ObjectOrientedPractics.Model.Discounts;
+using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +41,8 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Address Address { get; set; }
         public Cart Cart { get; set; }
+
+        public List<IDiscount> Discounts { get; set; }
         public List<Order> Orders { get; set; }
         
         /// <summary>
@@ -48,6 +52,8 @@ namespace ObjectOrientedPractics.Model
         /// <param name="address">Адрес клиента.</param>
         public Customer(string fullname, Address address)
         {
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount(0));
             _id = IdGenerator.CustomerId;
             Cart = new Cart();
             Orders = new List<Order>(5);
@@ -57,6 +63,8 @@ namespace ObjectOrientedPractics.Model
         public Customer()
         {
             _id = IdGenerator.CustomerId;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount(0));
             Fullname = "Иван Иванович Иванов";
             Address Address = new Address();
             Cart = new Cart();
