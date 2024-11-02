@@ -68,7 +68,7 @@ namespace ObjectOrientedPractics.Model
         }
         public object Clone()
         {
-            return new Address(Index, Country, City, Street, Building, Apartment);
+            return new Address(Index, Country, City, Street, Building, Apartament);
         }
 
         /// <inheritdoc/>

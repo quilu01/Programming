@@ -59,6 +59,10 @@ namespace ObjectOrientedPractics.Model
             get { return _cost;}
             set { if (value > 0 && value < 100000) _cost = value; }
         }
+        public int Id
+        {
+            get { return _id; }
+        }
         /// <summary>
         /// Создает экземпляр класса <see cref="Item"./>
         /// </summary>

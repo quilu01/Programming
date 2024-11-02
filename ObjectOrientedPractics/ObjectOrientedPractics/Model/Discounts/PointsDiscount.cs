@@ -105,7 +105,7 @@ namespace ObjectOrientedPractics.Model.Discounts
             else if (PointsBalance == pointsDiscount2.PointsBalance)
             {
                 return 0;
-            }s
+            }
             return 1;
         }
     }
