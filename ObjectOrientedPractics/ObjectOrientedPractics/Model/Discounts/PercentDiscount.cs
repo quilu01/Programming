@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    public class PercentDiscount : IDiscount
+    public class PercentDiscount : IDiscount, IComparable<PercentDiscount>
     {
         /// <summary>
         /// Категория товаров, на которые распространяется скидка.
@@ -95,6 +95,23 @@ namespace ObjectOrientedPractics.Model.Discounts
         {
             Category = category;
             TotalSpent = totalSpent;
+        }
+        public int CompareTo(PercentDiscount? percentDiscount2)
+        {
+            if (percentDiscount2 == null)
+                return 1;
+            if (object.ReferenceEquals(this, percentDiscount2))
+                return 0;
+
+            if (DiscountPercentage < percentDiscount2.DiscountPercentage)
+            {
+                return -1;
+            }
+            else if (DiscountPercentage == percentDiscount2.DiscountPercentage)
+            {
+                return 0;
+            }
+            return 1;
         }
     }
 }

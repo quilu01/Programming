@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Address
+    public class Address : ICloneable, IEquatable<Address>
     {
         private int _index;
         private string _country;
@@ -64,6 +65,34 @@ namespace ObjectOrientedPractics.Model
             Street = street;
             Building = building;
             Apartament = apartament;
+        }
+        public object Clone()
+        {
+            return new Address(Index, Country, City, Street, Building, Apartment);
+        }
+
+        /// <inheritdoc/>
+        public bool Equals(Address? address2)
+        {
+            if (address2 == null)
+                return false;
+            if (object.ReferenceEquals(this, address2))
+                return true;
+
+            PropertyInfo[] properties = typeof(Address).GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                var value1 = property.GetValue(this);
+                var value2 = property.GetValue(address2);
+
+                if (value1 == null && value2 == null)
+                    continue;
+                if (value1 == null || value2 == null || value1 != value2)
+                    return false; // Если одно из значений null или они не равны
+            }
+
+            return true;
         }
     }
 }

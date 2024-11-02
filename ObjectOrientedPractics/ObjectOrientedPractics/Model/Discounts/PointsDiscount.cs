@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    public class PointsDiscount : IDiscount
+    public class PointsDiscount : IDiscount, IComparable<PointsDiscount>
     {
         /// <summary>
         /// Количество баллов.
@@ -90,6 +90,23 @@ namespace ObjectOrientedPractics.Model.Discounts
         public PointsDiscount(int pointsBalance)
         {
             PointsBalance = pointsBalance;
+        }
+        public int CompareTo(PointsDiscount? pointsDiscount2)
+        {
+            if (pointsDiscount2 == null)
+                return 1;
+            if (object.ReferenceEquals(this, pointsDiscount2))
+                return 0;
+
+            if (PointsBalance < pointsDiscount2.PointsBalance)
+            {
+                return -1;
+            }
+            else if (PointsBalance == pointsDiscount2.PointsBalance)
+            {
+                return 0;
+            }s
+            return 1;
         }
     }
 }

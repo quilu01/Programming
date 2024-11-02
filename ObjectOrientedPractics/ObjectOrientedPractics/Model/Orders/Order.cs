@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace ObjectOrientedPractics.Model.Orders
 {
-    public class Order
+    public class Order : IEquatable<Order>
     {
         private readonly int _id;
 
@@ -33,6 +33,13 @@ namespace ObjectOrientedPractics.Model.Orders
             Status = OrderStatus.New;
             Total = total;
         }
-
+        public bool Equals(Order? order2)
+        {
+            if (order2 == null)
+                return false;
+            if (object.ReferenceEquals(this, order2))
+                return true;
+            return (Id == order2.Id);
+        }
     }
 }

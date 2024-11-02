@@ -7,7 +7,7 @@ using ObjectOrientedPractics.Model;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Cart
+    public class Cart : ICloneable
     {
         public List<Item> Items { get; set; }
 
@@ -29,6 +29,12 @@ namespace ObjectOrientedPractics.Model
         public Cart()
         {
             Items = new List<Item>(5);
+        }
+        public object Clone()
+        {
+            Cart copy = new();
+            copy.Items.AddRange([..Items]);
+            return copy;
         }
     }
 }
