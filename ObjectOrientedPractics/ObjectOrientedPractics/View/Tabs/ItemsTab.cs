@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enumerations;
+using ObjectOrientedPractics.Service;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -18,8 +19,13 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
             categoryComboBox.Items.AddRange(Enum.GetNames(typeof(Category)));
+            sortComboBox.Items.AddRange(["Name", "Cost (Ascending)", "Cost (Descending)"]);
+            sortComboBox.SelectedIndex = 0;
         }
         private List<Item> _items;
+
+        private bool _isRefreshed = false;
+        private List<Item> sortedItems;
         public List<Item> Items
         {
             get { return _items; }
@@ -27,6 +33,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 if (value != null)
                 {
+
                     _items = value;
                     Refresh();
                 }
@@ -40,11 +47,35 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void Refresh()
         {
-            itemsListBox.Items.Clear();
-            for (int i = 0; i < _items.Count; i++)
+            if (Items == null) return;
+            if (_isRefreshed)
             {
-                itemsListBox.Items.Add(_items[i].Name);
+                _isRefreshed = false;
+                return;
             }
+            var filteredItems = DataTools.Filter(Items, (item) => item.Name.Contains(findTextBox.Text, StringComparison.OrdinalIgnoreCase));
+
+
+            switch (sortComboBox.SelectedIndex)
+            {
+                case 1:
+                    sortedItems = DataTools.Sort(filteredItems, (item1, item2) => item1.Cost > item2.Cost);
+                    break;
+                case 2:
+                    sortedItems = DataTools.Sort(filteredItems, (item1, item2) => item1.Cost < item2.Cost);
+                    break;
+                default:
+                    sortedItems = DataTools.Sort(filteredItems, (item1, item2) => string.Compare(item1.Name, item2.Name, StringComparison.OrdinalIgnoreCase) > 0);
+                    break;
+            }
+            itemsListBox.Items.Clear();
+
+            for (int i = 0; i < sortedItems.Count; i++)
+            {
+                itemsListBox.Items.Add(sortedItems[i].Name);
+            }
+            _isRefreshed = true;
+
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -53,7 +84,8 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 Item item = new Item();
                 _items.Add(item);
-                itemsListBox.Items.Add(item.Name);
+                _isRefreshed = false;
+                Refresh();
             }
             catch (Exception ex)
             {
@@ -65,24 +97,27 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (itemsListBox.SelectedIndex != -1)
             {
-                
-                _currentItem = _items[itemsListBox.SelectedIndex];
+
+                _currentItem = _items[_items.IndexOf(sortedItems[itemsListBox.SelectedIndex])];
                 nameTextBox.Text = _currentItem.Name;
                 idTextBox.Text = _currentItem._id.ToString();
                 descriptionTextBox.Text = _currentItem.Info;
                 costTextBox.Text = _currentItem.Cost.ToString();
-                categoryComboBox.SelectedIndex = (int) _currentItem.Category;
+                categoryComboBox.SelectedIndex = (int)_currentItem.Category;
             }
 
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
-            _items.Remove(_currentItem);
-            itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
-            itemsListBox.SelectedIndex = -1;
-            Refresh();
+            if (itemsListBox.SelectedIndex != -1)
+            {
+                _items.Remove(_currentItem);
+                itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
+                itemsListBox.SelectedIndex = -1;
+                _isRefreshed = false;
+                Refresh();
+            }
 
         }
 
@@ -104,6 +139,7 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 _currentItem.Name = nameTextBox.Text;
+                _isRefreshed = false;
                 Refresh();
                 nameTextBox.BackColor = Color.White;
             }
@@ -137,12 +173,24 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 _currentItem.Category = (Category)Enum.Parse(typeof(Category), (string)categoryComboBox.SelectedItem);
-                
+
             }
             catch
             {
-                
+
             }
+        }
+
+        private void findTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _isRefreshed = false;
+            Refresh();
+        }
+
+        private void sortComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _isRefreshed = false;
+            Refresh();
         }
     }
 }
